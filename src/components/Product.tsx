@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { IProduct } from '../models/IProduct';
 import { useAppDispatch } from '../hooks/redux';
-import { toggleFavorite } from '../store/reducers/productsSlice';
+import { deleteProduct, toggleFavorite } from '../store/reducers/productsSlice';
 
 interface ProductProps {
   product: IProduct;
@@ -14,10 +14,15 @@ export const Product: FC<ProductProps> = ({ product }) => {
     dispatch(toggleFavorite(product.id));
   };
 
+  const onDeleteProduct = () => {
+    dispatch(deleteProduct(product.id));
+  };
+
   return (
-    <div className="w-[32%] h-[500px]  border rounded-lg p-2 flex flex-col relative">
+    <div className="w-[32%] h-[500px] border rounded-lg p-2 flex flex-col relative">
       <svg
         className="absolute top-0 right-0 cursor-pointer"
+        onClick={() => onDeleteProduct()}
         xmlns="http://www.w3.org/2000/svg"
         width="40"
         height="40"

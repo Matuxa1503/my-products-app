@@ -24,6 +24,9 @@ export const productsSlice = createSlice({
         product.isFavorite = !product.isFavorite;
       }
     },
+    deleteProduct(state, action: PayloadAction<number>) {
+      state.products = state.products.filter((product) => product.id !== action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -45,5 +48,5 @@ export const productsSlice = createSlice({
   },
 });
 
-export const { toggleFavorite } = productsSlice.actions;
+export const { toggleFavorite, deleteProduct } = productsSlice.actions;
 export default productsSlice.reducer;
