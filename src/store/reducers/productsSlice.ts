@@ -17,13 +17,23 @@ const initialState: ProductsState = {
 export const productsSlice = createSlice({
   name: 'products',
   initialState,
-  reducers: {},
+  reducers: {
+    toggleFavorite(state, action: PayloadAction<number>) {
+      const product = state.products.find((product) => product.id === action.payload);
+      if (product) {
+        product.isFavorite = !product.isFavorite;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.fulfilled, (state, action: PayloadAction<IProduct[]>) => {
         state.isLoading = false;
         state.error = '';
-        state.products = action.payload;
+        state.products = action.payload.map((product) => ({
+          ...product,
+          isFavorite: false,
+        }));
       })
       .addCase(fetchProducts.pending, (state) => {
         state.isLoading = true;
@@ -35,4 +45,5 @@ export const productsSlice = createSlice({
   },
 });
 
+export const { toggleFavorite } = productsSlice.actions;
 export default productsSlice.reducer;
