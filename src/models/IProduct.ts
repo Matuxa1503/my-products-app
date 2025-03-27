@@ -1,4 +1,4 @@
-interface Rating {
+interface IRating {
   rate: number;
   count: number;
 }
@@ -10,6 +10,6 @@ export interface IProduct {
   description: string;
   category: string;
   image: string;
-  rating: Rating;
+  rating: IRating;
   isFavorite?: boolean;
 }

@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { IProduct } from '../models/IProduct';
 import { useAppDispatch } from '../hooks/redux';
 import { deleteProduct, toggleFavorite } from '../store/reducers/productsSlice';
+import { Link } from 'react-router-dom';
 
 interface ProductProps {
   product: IProduct;
@@ -34,20 +35,23 @@ export const Product: FC<ProductProps> = ({ product, showFavorites, setFeaturedP
   };
 
   return (
-    <div className="w-[32%] h-[500px] border rounded-lg p-2 flex flex-col relative">
+    <Link className="w-[32%] h-[500px] border rounded-lg p-2 flex flex-col relative overflow-hidden" to={`/products/${product.id}`}>
       {!showFavorites && (
         <svg
-          className="absolute top-0 right-0 cursor-pointer"
-          onClick={() => onDeleteProduct()}
+          className="absolute top-0 right-0 cursor-pointer z-10"
+          onClick={(e) => {
+            e.preventDefault();
+            onDeleteProduct();
+          }}
           xmlns="http://www.w3.org/2000/svg"
           width="40"
           height="40"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
           <path d="M18 6 6 18" />
           <path d="m6 6 12 12" />
@@ -59,7 +63,10 @@ export const Product: FC<ProductProps> = ({ product, showFavorites, setFeaturedP
         <p className="text-3xl ">${product.price}</p>
         {product.isFavorite ? (
           <svg
-            onClick={() => onToggleFavorite()}
+            onClick={(e) => {
+              e.preventDefault();
+              onToggleFavorite();
+            }}
             className="cursor-pointer"
             xmlns="http://www.w3.org/2000/svg"
             width="40"
@@ -75,7 +82,10 @@ export const Product: FC<ProductProps> = ({ product, showFavorites, setFeaturedP
           </svg>
         ) : (
           <svg
-            onClick={() => onToggleFavorite()}
+            onClick={(e) => {
+              e.preventDefault();
+              onToggleFavorite();
+            }}
             className="cursor-pointer"
             xmlns="http://www.w3.org/2000/svg"
             width="40"
@@ -91,6 +101,6 @@ export const Product: FC<ProductProps> = ({ product, showFavorites, setFeaturedP
           </svg>
         )}
       </div>
-    </div>
+    </Link>
   );
 };
