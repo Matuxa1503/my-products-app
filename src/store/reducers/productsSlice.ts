@@ -18,7 +18,7 @@ export const productsSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    toggleFavorite(state, action: PayloadAction<number>) {
+    toggleStatusFavorite(state, action: PayloadAction<number>) {
       const product = state.products.find((product) => product.id === action.payload);
       if (product) {
         product.isFavorite = !product.isFavorite;
@@ -48,5 +48,5 @@ export const productsSlice = createSlice({
   },
 });
 
-export const { toggleFavorite, deleteProduct } = productsSlice.actions;
+export const { toggleStatusFavorite, deleteProduct } = productsSlice.actions;
 export default productsSlice.reducer;

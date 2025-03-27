@@ -2,13 +2,12 @@ import { FC, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { fetchProducts } from '../store/reducers/ActionCreators';
 import { Product } from '../components/Product';
-import { IProduct } from '../models/IProduct';
 
 export const Products: FC = () => {
   const { products, isLoading, error } = useAppSelector((state) => state.productsReducer);
+  const { favorites } = useAppSelector((state) => state.favoritesReducer);
   const dispatch = useAppDispatch();
 
-  const [featuredProducts, setFeaturedProducts] = useState<IProduct[]>([]);
   const [showFavorites, setShowFavorites] = useState<boolean>(false);
 
   useEffect(() => {
@@ -34,8 +33,11 @@ export const Products: FC = () => {
           </div>
 
           <div className="flex flex-wrap justify-between gap-y-8 gap-x-2">
-            {(showFavorites ? featuredProducts : products).map((item) => (
-              <Product key={item.id} product={item} showFavorites={showFavorites} setFeaturedProducts={setFeaturedProducts} />
+            {/* Если showFavorites изменили на true в кнопке выше то показываем избранные товары. Если товары не добавлены
+            то показываем "Товаров в избранном пока нет"*/}
+            {showFavorites && favorites.length === 0 && <h1 className="text-6xl mt-4">Товаров в избранном пока нет</h1>}
+            {(showFavorites ? favorites : products).map((item) => (
+              <Product key={item.id} product={item} showFavorites={showFavorites} />
             ))}
           </div>
         </>

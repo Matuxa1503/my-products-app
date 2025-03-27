@@ -1,37 +1,26 @@
 import { FC } from 'react';
 import { IProduct } from '../models/IProduct';
 import { useAppDispatch } from '../hooks/redux';
-import { deleteProduct, toggleFavorite } from '../store/reducers/productsSlice';
 import { Link } from 'react-router-dom';
+import { toggleFavorite } from '../store/reducers/favoritesSlice';
+import { deleteProduct, toggleStatusFavorite } from '../store/reducers/productsSlice';
 
 interface ProductProps {
   product: IProduct;
   showFavorites: boolean;
-  setFeaturedProducts: React.Dispatch<React.SetStateAction<IProduct[]>>;
 }
 
-export const Product: FC<ProductProps> = ({ product, showFavorites, setFeaturedProducts }) => {
+export const Product: FC<ProductProps> = ({ product, showFavorites }) => {
   const dispatch = useAppDispatch();
 
   const onToggleFavorite = () => {
-    dispatch(toggleFavorite(product.id));
-
-    setFeaturedProducts((prev) => {
-      const isAlreadyFavorite = prev.some((item) => item.id === product.id);
-      if (isAlreadyFavorite) {
-        return prev.filter((item) => item.id !== product.id);
-      } else {
-        return [...prev, { ...product, isFavorite: true }];
-      }
-    });
+    dispatch(toggleStatusFavorite(product.id));
+    dispatch(toggleFavorite(product));
   };
 
   const onDeleteProduct = () => {
     dispatch(deleteProduct(product.id));
-
-    setFeaturedProducts((prev) => {
-      return prev.filter((item) => item.id !== product.id);
-    });
+    dispatch(toggleFavorite(product));
   };
 
   return (
