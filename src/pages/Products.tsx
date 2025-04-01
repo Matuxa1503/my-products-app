@@ -2,12 +2,12 @@ import { FC, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { fetchProducts } from '../store/reducers/ActionCreators';
 import { Product } from '../components/Product';
+import { Link } from 'react-router-dom';
 
 export const Products: FC = () => {
   const { products, isLoading, error } = useAppSelector((state) => state.productsReducer);
   const { favorites } = useAppSelector((state) => state.favoritesReducer);
   const dispatch = useAppDispatch();
-
   const [showFavorites, setShowFavorites] = useState<boolean>(false);
 
   useEffect(() => {
@@ -23,13 +23,18 @@ export const Products: FC = () => {
 
       {!isLoading && !error && (
         <>
-          <div className="flex gap-3 mb-2">
-            <button className={`border rounded-lg px-4 py-2 ${!showFavorites && 'bg-gray-300'}`} onClick={() => setShowFavorites(false)}>
-              Все товары
-            </button>
-            <button className={`border rounded-lg px-4 py-2 ${showFavorites && 'bg-gray-300'}`} onClick={() => setShowFavorites(true)}>
-              Избранные товары
-            </button>
+          <div className="flex justify-between mb-2">
+            <div className="flex gap-3">
+              <button className={`border rounded-lg px-4 py-2 ${!showFavorites && 'bg-gray-300'}`} onClick={() => setShowFavorites(false)}>
+                Все товары
+              </button>
+              <button className={`border rounded-lg px-4 py-2 ${showFavorites && 'bg-gray-300'}`} onClick={() => setShowFavorites(true)}>
+                Избранные товары
+              </button>
+            </div>
+            <Link to={'/create-product'} className="border rounded-lg px-4 py-2">
+              Добавить новый элемент
+            </Link>
           </div>
 
           <div className="flex flex-wrap justify-between gap-y-8 gap-x-2">

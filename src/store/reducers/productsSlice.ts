@@ -18,6 +18,9 @@ export const productsSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
+    addNewProduct(state, action: PayloadAction<IProduct>) {
+      state.products.push(action.payload);
+    },
     toggleStatusFavorite(state, action: PayloadAction<number>) {
       const product = state.products.find((product) => product.id === action.payload);
       if (product) {
@@ -48,5 +51,5 @@ export const productsSlice = createSlice({
   },
 });
 
-export const { toggleStatusFavorite, deleteProduct } = productsSlice.actions;
+export const { addNewProduct, toggleStatusFavorite, deleteProduct } = productsSlice.actions;
 export default productsSlice.reducer;

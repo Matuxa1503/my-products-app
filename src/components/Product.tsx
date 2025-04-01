@@ -19,8 +19,8 @@ export const Product: FC<ProductProps> = ({ product, showFavorites }) => {
   };
 
   const onDeleteProduct = () => {
+    onToggleFavorite();
     dispatch(deleteProduct(product.id));
-    dispatch(toggleFavorite(product));
   };
 
   return (
