@@ -1,19 +1,24 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { fetchProduct } from '../store/reducers/ActionCreators';
+import { useAppSelector } from '../hooks/redux';
 import { Button } from '../components/Button';
+import { IProduct } from '../models/IProduct';
 
 export const ProductDetail: FC = () => {
-  const { product, isLoading, error } = useAppSelector((state) => state.productReducer);
-  const dispatch = useAppDispatch();
+  const { products, isLoading, error } = useAppSelector((state) => state.productsReducer);
   const { id } = useParams();
+  const [product, setProduct] = useState<IProduct | null>(null);
 
   useEffect(() => {
-    if (id) {
-      dispatch(fetchProduct(id));
+    if (products) {
+      const product = products.find((p) => p.id === Number(id)) || null;
+      setProduct(product);
     }
-  }, [dispatch, id]);
+  }, [products, id]);
+
+  if (!product) {
+    return <h1>Товар не найден</h1>;
+  }
 
   return (
     <div>
