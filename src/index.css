@@ -1,47 +1,60 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,regular,500,700);
 @import 'tailwindcss';
 
-body {
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 300;
-  margin: 0 auto;
-  color: #fff;
-}
+@layer base {
+  body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    line-height: 1.625rem;
+    margin: 0 auto;
+    padding: 15px;
+    background-color: #aca9a9;
+  }
 
-* {
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
+  * {
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-input,
-button,
-textarea {
-  font-family: inherit;
-}
+  input,
+  button,
+  textarea {
+    font-family: inherit;
+  }
 
-button {
-  cursor: pointer;
-}
+  button {
+    cursor: pointer;
+  }
 
-ul li {
-  list-style: none;
-}
+  ul li {
+    list-style: none;
+  }
 
-a,
-a:visited {
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: inherit;
+  }
 
-p {
-  width: auto;
+  a,
+  a:visited {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  p {
+    width: auto;
+  }
 }
