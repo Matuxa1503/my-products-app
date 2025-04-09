@@ -6,6 +6,7 @@ import { IProductForm } from '../models/IProductForm';
 import { useAppDispatch } from '../hooks/redux';
 import { addNewProduct } from '../store/reducers/productsSlice';
 import { Link, useNavigate } from 'react-router-dom';
+import { FormInput } from '../components/FormInput';
 
 export const CreateProduct: FC = () => {
   const dispatch = useAppDispatch();
@@ -54,38 +55,11 @@ export const CreateProduct: FC = () => {
 
       <div className="flex flex-col items-center justify-center h-screen">
         <form className="w-[600px] h-[700px] p-15 border-0 rounded-3xl drop-shadow-lg bg-gray-500" onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-13 relative">
-            <input
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-2xl shadow-sm focus: outline-none"
-              {...register('title')}
-              placeholder="Название товара"
-            />
-            {errors.title && <p className="text-red-600 absolute">{errors.title.message}</p>}
-          </div>
-          <div className="mb-13 relative">
-            <input
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-2xl shadow-sm focus: outline-none"
-              {...register('price', { valueAsNumber: true })}
-              placeholder="Цена товара"
-            />
-            {errors.price && <p className="text-red-600 absolute">{errors.price.message}</p>}
-          </div>
-          <div className="mb-13 relative">
-            <input
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-2xl shadow-sm focus: outline-none"
-              {...register('description')}
-              placeholder="Описание товара"
-            />
-            {errors.description && <p className="text-red-600 absolute">{errors.description.message}</p>}
-          </div>
-          <div className="mb-13 relative">
-            <input
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-2xl shadow-sm focus: outline-none"
-              {...register('category')}
-              placeholder="Категория товара"
-            />
-            {errors.category && <p className="text-red-600 absolute">{errors.category.message}</p>}
-          </div>
+          <FormInput register={register} name={'title'} error={errors.title} placeholder={'Название товара'} />
+          <FormInput register={register} name={'price'} error={errors.price} placeholder={'Цена товара'} />
+          <FormInput register={register} name={'description'} error={errors.description} placeholder={'Описание товара'} />
+          <FormInput register={register} name={'category'} error={errors.category} placeholder={'Категория товара'} />
+
           <div className="mb-13">
             <input {...register('image')} type="file" />
           </div>
