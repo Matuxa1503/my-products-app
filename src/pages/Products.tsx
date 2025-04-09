@@ -5,6 +5,7 @@ import { Product } from '../components/Product';
 import { Link } from 'react-router-dom';
 import { usePagination } from '../hooks/pagination';
 import { Button } from '../components/Button';
+import { Pagination } from '../components/Pagination';
 
 export const Products: FC = () => {
   const dispatch = useAppDispatch();
@@ -40,38 +41,12 @@ export const Products: FC = () => {
             </Link>
           </div>
 
-          {/* пагинацию в др файл */}
+          {/* pagination */}
           {!showFavorites && (
-            <div className="w-[400px] flex justify-between my-6">
-              <Button
-                onClick={() => prevPage()}
-                disabled={currentPage === 1}
-                text={'Назад'}
-                styles={currentPage === 1 ? 'bg-gray-300 text-gray-600 cursor-auto' : 'hover:bg-gray-200 transition-colors'}
-              />
-
-              {Array.from({ length: totalPages }, (_, index) => (
-                <Button
-                  key={index + 1}
-                  onClick={() => setPage(index + 1)}
-                  disabled={currentPage === index + 1}
-                  text={index + 1}
-                  styles={currentPage === index + 1 && 'text-red-700'}
-                />
-              ))}
-
-              <Button
-                onClick={() => nextPage()}
-                disabled={currentPage === totalPages}
-                text={'Вперед'}
-                styles={currentPage === totalPages ? 'bg-gray-300 text-gray-600 cursor-auto' : 'hover:bg-gray-200 transition-colors'}
-              />
-            </div>
+            <Pagination currentPage={currentPage} totalPages={totalPages} setPage={setPage} prevPage={prevPage} nextPage={nextPage} />
           )}
 
           <div className="flex flex-wrap justify-between gap-y-8 gap-x-2">
-            {/* Если showFavorites изменили на true то показываем избранные товары. Если товары не добавлены
-            то показываем "Товаров в избранном пока нет"*/}
             {showFavorites && favorites.length === 0 && <h1 className="text-6xl mt-4">Товаров в избранном пока нет</h1>}
             {(showFavorites ? favorites : paginatedProducts).map((item) => (
               <Product key={item.id} product={item} showFavorites={showFavorites} />
