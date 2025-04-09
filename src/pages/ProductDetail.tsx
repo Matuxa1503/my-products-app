@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useAppSelector } from '../hooks/redux';
-import { Button } from '../components/Button';
 import { IProduct } from '../models/IProduct';
 
 export const ProductDetail: FC = () => {
@@ -24,7 +23,11 @@ export const ProductDetail: FC = () => {
     <div>
       {isLoading && <h1>Загрузка данных...</h1>}
       {error && <h1>Ошибка: {error}</h1>}
-      <Button />
+
+      <Link to={'/products'} className="border rounded-lg px-4 py-2 hover:bg-gray-200 transition-colors">
+        Вернуться на главную
+      </Link>
+
       <div className="mt-4">
         <h1 className="text-4xl">{product.title}</h1>
         <p className="py-3 first-letter:capitalize">{product.description}</p>

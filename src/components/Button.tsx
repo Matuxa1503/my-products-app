@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { IButton } from '../models/IButton';
 
-export const Button: FC = () => {
+export const Button: FC<IButton> = ({ onClick, disabled, text, styles = '' }) => {
   return (
-    <Link to={'/products'}>
-      <button className="border rounded-lg px-4 py-2 hover:bg-gray-200 transition-colors">Вернуться к списку товаров</button>
-    </Link>
+    <button disabled={disabled} onClick={onClick} className={`border rounded-lg px-4 py-2 ${styles}`}>
+      {text}
+    </button>
   );
 };

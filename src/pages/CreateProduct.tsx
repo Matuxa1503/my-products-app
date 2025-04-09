@@ -1,12 +1,11 @@
 import { useForm } from 'react-hook-form';
-import { Button } from '../components/Button';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FC } from 'react';
 import { IProductForm } from '../models/IProductForm';
 import { useAppDispatch } from '../hooks/redux';
 import { addNewProduct } from '../store/reducers/productsSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const CreateProduct: FC = () => {
   const dispatch = useAppDispatch();
@@ -49,7 +48,10 @@ export const CreateProduct: FC = () => {
 
   return (
     <div>
-      <Button />
+      <Link to={'/products'} className="border rounded-lg px-4 py-2 hover:bg-gray-200 transition-colors">
+        Вернуться к списку товаров
+      </Link>
+
       <div className="flex flex-col items-center justify-center h-screen">
         <form className="w-[600px] h-[700px] p-15 border-0 rounded-3xl drop-shadow-lg bg-gray-500" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-13 relative">
