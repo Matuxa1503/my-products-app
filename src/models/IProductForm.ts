@@ -6,7 +6,7 @@ export interface IProductForm {
   price: number;
   description: string;
   category: string;
-  image: FileList;
+  image: any;
 }
 
 export interface IFormInput {
