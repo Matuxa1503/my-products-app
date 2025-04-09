@@ -15,15 +15,18 @@ export const ProductDetail: FC = () => {
     }
   }, [products, id]);
 
+  if (isLoading) {
+    return <h1>Загрузка данных...</h1>;
+  }
   if (!product) {
     return <h1>Товар не найден</h1>;
+  }
+  if (error) {
+    return <h1>Ошибка: {error}</h1>;
   }
 
   return (
     <div>
-      {isLoading && <h1>Загрузка данных...</h1>}
-      {error && <h1>Ошибка: {error}</h1>}
-
       <Link to={'/products'} className="border rounded-lg px-4 py-2 hover:bg-gray-200 transition-colors">
         Вернуться на главную
       </Link>

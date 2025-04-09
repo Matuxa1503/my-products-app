@@ -24,36 +24,36 @@ export const Products: FC = () => {
     }
   }, [dispatch, products.length]);
 
+  if (isLoading) {
+    return <h1>Загрузка данных...</h1>;
+  }
+  if (error) {
+    return <h1>Ошибка: {error}</h1>;
+  }
+
   return (
     <div>
-      {isLoading && <h1>Загрузка данных...</h1>}
-      {error && <h1>Ошибка: {error}</h1>}
+      <div className="flex justify-between mb-2">
+        <div className="flex gap-3">
+          <Button onClick={() => setShowFavorites(false)} text={'Все товары'} styles={!showFavorites && 'bg-gray-300'} />
+          <Button onClick={() => setShowFavorites(true)} text={'Избранные товары'} styles={showFavorites && 'bg-gray-300'} />
+        </div>
+        <Link to={'/create-product'} className="border rounded-lg px-4 py-2 hover:bg-gray-200 transition-colors">
+          Добавить новый элемент
+        </Link>
+      </div>
 
-      {!isLoading && !error && (
-        <>
-          <div className="flex justify-between mb-2">
-            <div className="flex gap-3">
-              <Button onClick={() => setShowFavorites(false)} text={'Все товары'} styles={!showFavorites && 'bg-gray-300'} />
-              <Button onClick={() => setShowFavorites(true)} text={'Избранные товары'} styles={showFavorites && 'bg-gray-300'} />
-            </div>
-            <Link to={'/create-product'} className="border rounded-lg px-4 py-2 hover:bg-gray-200 transition-colors">
-              Добавить новый элемент
-            </Link>
-          </div>
-
-          {/* pagination */}
-          {!showFavorites && (
-            <Pagination currentPage={currentPage} totalPages={totalPages} setPage={setPage} prevPage={prevPage} nextPage={nextPage} />
-          )}
-
-          <div className="flex flex-wrap justify-between gap-y-8 gap-x-2">
-            {showFavorites && favorites.length === 0 && <h1 className="text-6xl mt-4">Товаров в избранном пока нет</h1>}
-            {(showFavorites ? favorites : paginatedProducts).map((item) => (
-              <Product key={item.id} product={item} showFavorites={showFavorites} />
-            ))}
-          </div>
-        </>
+      {/* pagination */}
+      {!showFavorites && (
+        <Pagination currentPage={currentPage} totalPages={totalPages} setPage={setPage} prevPage={prevPage} nextPage={nextPage} />
       )}
+
+      <div className="flex flex-wrap justify-between gap-y-8 gap-x-2">
+        {showFavorites && favorites.length === 0 && <h1 className="text-6xl mt-4">Товаров в избранном пока нет</h1>}
+        {(showFavorites ? favorites : paginatedProducts).map((item) => (
+          <Product key={item.id} product={item} showFavorites={showFavorites} />
+        ))}
+      </div>
     </div>
   );
 };
