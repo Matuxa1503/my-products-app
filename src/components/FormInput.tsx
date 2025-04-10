@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { IFormInput } from '../models/IProductForm';
+import { IFormInput, IProductForm } from '../models/IProductForm';
 
-export const FormInput: FC<IFormInput> = ({ register, name, error, placeholder }) => {
+export const FormInput: FC<IFormInput<IProductForm>> = ({ register, name, error, placeholder }) => {
   return (
     <div className="mb-13 relative">
       <input
