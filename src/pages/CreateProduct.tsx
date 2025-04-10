@@ -29,8 +29,14 @@ export const CreateProduct: FC = () => {
   } = useForm<IProductForm>({ resolver: yupResolver(schema) });
 
   const onSubmit = (data: IProductForm) => {
-    const file = data.image[0];
+    let img;
     const id = Date.now();
+
+    if (data.image) {
+      img = URL.createObjectURL(data.image[0]); // отображение выбранного изображения
+    } else {
+      img = 'public/images/plug.png';
+    }
 
     const obj = {
       id,
@@ -38,7 +44,7 @@ export const CreateProduct: FC = () => {
       price: data.price,
       description: data.description,
       category: data.category,
-      image: file ? URL.createObjectURL(file) : 'public/images/plug.png',
+      image: img,
       isFavorite: false,
     };
 
@@ -59,10 +65,10 @@ export const CreateProduct: FC = () => {
           <FormInput register={register} name={'price'} error={errors.price} placeholder={'Цена товара'} />
           <FormInput register={register} name={'description'} error={errors.description} placeholder={'Описание товара'} />
           <FormInput register={register} name={'category'} error={errors.category} placeholder={'Категория товара'} />
-
           <div className="mb-13">
             <input {...register('image')} type="file" />
           </div>
+
           <button
             className="w-full rounded-lg bg-blue-600 px-6 py-3 text-white font-semibold shadow-md transition-all duration-300 hover:bg-blue-500"
             type="submit"

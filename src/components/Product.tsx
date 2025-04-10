@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { IProduct } from '../models/IProduct';
 import { useAppDispatch } from '../hooks/redux';
 import { Link } from 'react-router-dom';
-import { toggleFavorite } from '../store/reducers/favoritesSlice';
+import { removeFromFavorites, toggleFavorite } from '../store/reducers/favoritesSlice';
 import { deleteProduct, toggleStatusFavorite } from '../store/reducers/productsSlice';
 
 interface ProductProps {
@@ -19,7 +19,7 @@ export const Product: FC<ProductProps> = ({ product, showFavorites }) => {
   };
 
   const onDeleteProduct = () => {
-    onToggleFavorite();
+    dispatch(removeFromFavorites(product.id));
     dispatch(deleteProduct(product.id));
   };
 
