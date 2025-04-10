@@ -24,14 +24,6 @@ export const Products: FC = () => {
     }
   }, [dispatch, products.length]);
 
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
-
-  useEffect(() => {
-    console.log(favorites);
-  }, [favorites]);
-
   if (isLoading) {
     return <h1>Загрузка данных...</h1>;
   }
