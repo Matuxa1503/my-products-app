@@ -11,6 +11,8 @@ export const ProductDetail: FC = () => {
   useEffect(() => {
     if (products) {
       const product = products.find((p) => p.id === Number(id)) || null;
+      console.log(product);
+
       setProduct(product);
     }
   }, [products, id]);

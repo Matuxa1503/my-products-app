@@ -42,7 +42,7 @@ export const Products: FC = () => {
           />
           <Button
             onClick={() => setShowFavorites(true)}
-            text={'Избранные товары'}
+            text={`Избранные товары ${favorites.length ? favorites.length : ''}`}
             styles={`${showFavorites && 'bg-gray-300 cursor-auto'} ${!showFavorites && 'hover:bg-gray-200 transition-colors'}`}
           />
         </div>

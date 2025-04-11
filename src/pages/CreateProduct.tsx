@@ -33,10 +33,10 @@ export const CreateProduct: FC = () => {
     let img;
     const id = Date.now();
 
-    if (data.image) {
+    if (data.image?.length) {
       img = URL.createObjectURL(data.image[0]); // отображение выбранного изображения
     } else {
-      img = 'public/images/plug.png';
+      img = '/images/plug.png';
     }
 
     const obj = {
@@ -67,17 +67,23 @@ export const CreateProduct: FC = () => {
           <FormInput register={register} name={'description'} error={errors.description} placeholder={'Описание товара'} />
           <FormInput register={register} name={'category'} error={errors.category} placeholder={'Категория товара'} />
           <div className="mb-6">
-            <label className="inline-block mb-2 px-4 py-2 border text-black  rounded-lg cursor-pointer hover:bg-gray-400 transition-colors">
+            <label
+              htmlFor="image"
+              className="inline-block mb-2 px-4 py-2 border text-black rounded-lg cursor-pointer hover:bg-gray-400 transition-colors"
+            >
               Загрузить изображение
-              <input
-                type="file"
-                {...register('image')}
-                onChange={(e) => {
-                  setFileName(e.target.files?.[0]?.name || '');
-                }}
-                className="hidden"
-              />
             </label>
+
+            <input
+              type="file"
+              id="image"
+              {...register('image')}
+              onChange={(e) => {
+                setFileName(e.target.files?.[0]?.name || '');
+              }}
+              className="hidden"
+            />
+
             {fileName && <span className="text-xl text-gray-700 truncate">{fileName}</span>}
           </div>
 
