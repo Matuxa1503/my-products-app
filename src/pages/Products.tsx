@@ -35,8 +35,16 @@ export const Products: FC = () => {
     <div>
       <div className="flex justify-between mb-2">
         <div className="flex gap-3">
-          <Button onClick={() => setShowFavorites(false)} text={'Все товары'} styles={!showFavorites && 'bg-gray-300'} />
-          <Button onClick={() => setShowFavorites(true)} text={'Избранные товары'} styles={showFavorites && 'bg-gray-300'} />
+          <Button
+            onClick={() => setShowFavorites(false)}
+            text={'Все товары'}
+            styles={`${!showFavorites && 'bg-gray-300 cursor-auto'} ${showFavorites && 'hover:bg-gray-200 transition-colors'}`}
+          />
+          <Button
+            onClick={() => setShowFavorites(true)}
+            text={'Избранные товары'}
+            styles={`${showFavorites && 'bg-gray-300 cursor-auto'} ${!showFavorites && 'hover:bg-gray-200 transition-colors'}`}
+          />
         </div>
         <Link to={'/create-product'} className="border rounded-lg px-4 py-2 hover:bg-gray-200 transition-colors">
           Добавить новый элемент

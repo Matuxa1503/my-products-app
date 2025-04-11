@@ -36,7 +36,7 @@ export const ProductDetail: FC = () => {
         <p className="py-3 first-letter:capitalize">{product.description}</p>
         <p>Категория: {product.category}</p>
         <div className="flex items-end gap-20">
-          <img className="w-[500px] mt-5" src={product.image} />
+          <img className="w-[500px] h-[500px] object-contain mt-5" src={product.image} />
           <div>
             {product.rating?.rate && <p className="text-3xl">Оценка: {product.rating.rate} / 5</p>}
             {product.rating?.count && <p className="text-3xl">Куплено: {product.rating.count}</p>}

@@ -24,10 +24,10 @@ export const Product: FC<ProductProps> = ({ product, showFavorites }) => {
   };
 
   return (
-    <Link className="w-[32%] h-[500px] border rounded-lg p-2 flex flex-col relative overflow-hidden" to={`/products/${product.id}`}>
+    <Link className="w-[32%] h-[500px] border rounded-lg p-2 flex flex-col relative group" to={`/products/${product.id}`}>
       {!showFavorites && (
         <svg
-          className="absolute top-0 right-0 cursor-pointer z-10"
+          className="absolute top-0 right-0 cursor-pointer z-10 transition-transform duration-300 hover:scale-80"
           onClick={(e) => {
             e.preventDefault();
             onDeleteProduct();
@@ -46,10 +46,10 @@ export const Product: FC<ProductProps> = ({ product, showFavorites }) => {
           <path d="m6 6 12 12" />
         </svg>
       )}
-      <h1 className="text-3xl max-w-[380px]">{product.title}</h1>
       <img className="w-[250px] h-[250px] object-contain mx-auto mt-8" src={product.image} alt="" />
-      <div className="flex items-center justify-between mt-auto ">
-        <p className="text-3xl ">${product.price}</p>
+      <h1 className="text-2xl font-normal my-auto text-center">{product.title}</h1>
+      <div className="flex items-center justify-between mt-auto">
+        <p className="text-3xl ">{product.price} $</p>
         {product.isFavorite ? (
           <svg
             onClick={(e) => {
@@ -75,13 +75,13 @@ export const Product: FC<ProductProps> = ({ product, showFavorites }) => {
               e.preventDefault();
               onToggleFavorite();
             }}
-            className="cursor-pointer"
+            className="cursor-pointer opacity-0 group-hover:opacity-100 transition duration-200"
             xmlns="http://www.w3.org/2000/svg"
             width="40"
             height="40"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#ffffff"
+            stroke="gray"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"

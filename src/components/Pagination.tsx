@@ -18,7 +18,9 @@ export const Pagination: FC<IPagination> = ({ currentPage, totalPages, setPage, 
           onClick={() => setPage(index + 1)}
           disabled={currentPage === index + 1}
           text={index + 1}
-          styles={currentPage === index + 1 && 'text-red-700'}
+          styles={`${currentPage === index + 1 && 'text-red-700 cursor-auto'} ${
+            currentPage !== index + 1 && 'hover:bg-gray-200 transition-colors'
+          }`}
         />
       ))}
 
