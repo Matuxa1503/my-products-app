@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { usePagination } from '../hooks/pagination';
 import { Button } from '../components/Button';
 import { Pagination } from '../components/Pagination';
-import { SearchInput } from '../components/searchInput';
+import { SearchInput } from '../components/SearchInput';
 
 export const Products: FC = () => {
   const dispatch = useAppDispatch();
