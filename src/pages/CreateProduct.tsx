@@ -66,10 +66,10 @@ export const CreateProduct: FC = () => {
           <FormInput register={register} name={'price'} error={errors.price} placeholder={'Цена товара'} />
           <FormInput register={register} name={'description'} error={errors.description} placeholder={'Описание товара'} />
           <FormInput register={register} name={'category'} error={errors.category} placeholder={'Категория товара'} />
-          <div className="mb-6">
+          <div className="mb-6 relative">
             <label
               htmlFor="image"
-              className="inline-block mb-2 px-4 py-2 border text-black rounded-lg cursor-pointer hover:bg-gray-400 transition-colors"
+              className="relative inline-block z-10 mb-2 px-4 py-2 border text-black rounded-lg cursor-pointer hover:bg-gray-400 transition-colors"
             >
               Загрузить изображение
             </label>
@@ -81,7 +81,7 @@ export const CreateProduct: FC = () => {
               onChange={(e) => {
                 setFileName(e.target.files?.[0]?.name || '');
               }}
-              className="hidden"
+              className="absolute top-0 left-0 z-1 w-3 opacity-0"
             />
 
             {fileName && <span className="text-xl text-gray-700 truncate">{fileName}</span>}
