@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { IProductDetailForm, IProductForm } from '../models/IProductForm';
+import { IProductForm } from '../models/IProductForm';
 import { useAppDispatch } from '../hooks/redux';
 import { addNewProduct } from '../store/reducers/productsSlice';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,7 +9,7 @@ export const CreateProduct: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const onSubmit = (data: IProductForm | IProductDetailForm, reset: () => void) => {
+  const onSubmit = (data: IProductForm, reset: () => void) => {
     let img;
     const id = Date.now();
 
