@@ -1,6 +1,7 @@
 import { FieldError, Path, UseFormRegister } from 'react-hook-form';
 
 export interface IProductForm {
+  id?: number;
   title: string;
   price: number;
   description: string;
